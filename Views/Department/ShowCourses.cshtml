@@ -1,0 +1,53 @@
+﻿@model WebApplication1.Models.Department
+
+@{
+    ViewData["Title"] = "ShowCourses";
+}
+
+<div>
+    <h4>Show Courses</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+    </dl>
+</div>
+<div>
+    <h4>Department Courses</h4>
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Update Student Degrees</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Courses)
+            {
+                <tr>
+                    <td>@item.CrsId</td>
+                    <td>@item.CrsName</td>
+                    <td>
+                        <a class="btn btn-info" asp-action="UpdateStudentDegree" asp-route-deptid="@Model.Id" asp-route-crsid="@item.CrsId">Update</a>
+                        | <a class="btn btn-info" asp-action="ShowAllDegrees" asp-route-deptid="@Model.Id" asp-route-crsid="@item.CrsId">Show Degrees</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

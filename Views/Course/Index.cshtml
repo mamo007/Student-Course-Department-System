@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WebApplication1.Models.Course>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+{
+<a asp-action="Create" class="btn btn-dark d-inline">Create</a>
+<br />
+<br />
+}
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+            <th>
+                Name
+                @*@Html.DisplayNameFor(model => model.CrsName)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CrsName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+                {
+                    <a class="btn btn-dark" asp-action="Edit" asp-route-id="@item.CrsId">Edit</a> <span> | </span>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.CrsId">Details</a> <span> | </span>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CrsId">Delete</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.CrsId">Details</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

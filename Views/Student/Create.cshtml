@@ -1,0 +1,20 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+<h1>Add - New Student</h1>
+<br />
+<div class="w-50">
+    <form asp-action="create">
+        @*<label asp-for="Id">Student Id</label>
+        <input class="form-control" asp-for="Id" />
+        <span asp-validation-for="Id" class="d-block"></span>*@
+        <Partial name="PartialCreateEdit" />
+        <input type="submit" class="btn btn-success" value="Add Student" />
+    </form>
+</div>
+
+@section Scripts{
+    <Partial name="_ValidationScriptsPartial" />
+}

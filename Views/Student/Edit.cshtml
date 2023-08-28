@@ -1,0 +1,19 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit - Student</h1>
+<br />
+<div class="w-50">
+    <form asp-action="Edit">
+        <label asp-for="Id">Student Id</label>
+        <input class="form-control" asp-for="Id" readonly />
+        <Partial name="PartialCreateEdit" />
+        <input type="submit" class="btn btn-success" value="Update Student" />
+    </form>
+</div>
+
+@section Scripts{
+    <Partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Student>
+
+@{
+    ViewData["Title"] = "ShowAllDegrees";
+}
+
+<h1>Show All Degrees</h1>
+
+<div>
+    <form method="post">
+        <input hidden type="text" name="crsid" value="@ViewBag.crsid" readonly />
+        <input hidden type="text" name="deptid" value="@ViewBag.deptid" readonly />
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Degree</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.FName @item.LName</td>
+                        <td>
+                            @{
+                                if (item.StudentCourses.Count > 0)
+                                {
+                                    foreach (var deg in item.StudentCourses.Where(a=> a.CourseId == ViewBag.crsid))
+                                    {
+                                        if (deg.Degree >= 0)
+                                            @deg.Degree
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="text-danger">N/A</span>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input class="btn btn-success" type="submit" value="Update" />
+    </form>
+</div>

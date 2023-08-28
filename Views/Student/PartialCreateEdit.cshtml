@@ -1,0 +1,20 @@
+﻿@model Student
+
+<label asp-for="FName">Student First Name</label>
+<input class="form-control" asp-for="FName" />
+<span asp-validation-for="FName" class="d-block"></span>
+<label asp-for="LName">Student Last Name</label>
+<input class="form-control" asp-for="LName" />
+<span asp-validation-for="LName" class="d-block"></span>
+@*<label asp-for="DeptId">Student Department Id</label>
+        <input class="form-control" asp-for="DeptId" value="@Model.DeptId" />*@
+<label asp-for="Age">Student Age</label>
+<input class="form-control" asp-for="Age" />
+<span asp-validation-for="Age" class="d-block"></span>
+<label asp-for="Email">Student Email</label>
+<input class="form-control" asp-for="Email" />
+<span asp-validation-for="Email" class="d-block"></span>
+<label asp-for="DeptId">Student Department Name</label>
+<select asp-for="DeptId" asp-items="@ViewBag.deptname" class="form-select"></select>
+<span asp-validation-for="DeptId" class="d-block"></span>
+<br />

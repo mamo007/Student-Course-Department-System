@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Student>
+@{
+    ViewData["Title"] = "Update Student Degree";
+}
+
+<h1>Update Student Degree</h1>
+
+<div>
+    <form method="post">
+        <input hidden type="text" name="crsid" value="@ViewBag.crsid" readonly/>
+        <input hidden type="text" name="deptid" value="@ViewBag.deptid" readonly />
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Degree</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.FName @item.LName</td>
+                        <td>
+                            @{
+                                if (item.StudentCourses.Count > 0)
+                                {
+                                    foreach (var deg in item.StudentCourses.Where(a => a.CourseId == ViewBag.crsid))
+                                    {
+                                        if(deg.Degree >=0)
+                                        {
+                                            <input class="form-text" type="text" name="degree.@item.Id" value="@deg.Degree" />
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <input class="form-text" type="text" name="degree.@item.Id" />
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input class="btn btn-success" type="submit" value="Update" />
+    </form>
+</div>
+

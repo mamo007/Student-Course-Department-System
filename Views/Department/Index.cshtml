@@ -1,0 +1,53 @@
+﻿@model List<Department>
+@{
+    ViewData["Title"] = "Departments Page";
+}
+
+@if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+{
+    <a asp-action="Create" class="btn btn-dark d-inline">Create</a>
+    <br />
+    <br />
+}
+
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Capacity</td>
+                @if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+                {
+                <td>
+
+                        <a class="btn btn-dark" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <span> | </span> <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <span> | </span> <a class="btn btn-danger" asp-action="Delete" onclick="return confirm('Are you sure?')" asp-route-id="@item.Id">Delete</a>
+
+                </td>
+                <td>
+                    <a class="btn btn-info" asp-action="updateCourses" asp-route-id="@item.Id">Update Courses</a>
+                        <span> | </span><a class="btn btn-info" asp-action="ShowCourses" asp-route-id="@item.Id">Show Courses</a>
+                </td>
+                }
+                else
+                {
+                <td>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+                }
+        </tr>
+    }
+    </tbody>
+</table>
+
